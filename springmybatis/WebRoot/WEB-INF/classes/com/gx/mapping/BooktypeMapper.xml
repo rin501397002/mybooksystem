@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.dao.BooktypeMapper" >
+  <resultMap id="BaseResultMap" type="com.gx.po.Booktype" >
+    <id column="booktypeID" property="booktypeid" jdbcType="INTEGER" />
+    <result column="booktypename" property="booktypename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    booktypeID, booktypename
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from booktype
+    where booktypeID = #{booktypeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from booktype
+    where booktypeID = #{booktypeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gx.po.Booktype" >
+    insert into booktype (booktypeID, booktypename)
+    values (#{booktypeid,jdbcType=INTEGER}, #{booktypename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.po.Booktype" >
+    insert into booktype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="booktypeid != null" >
+        booktypeID,
+      </if>
+      <if test="booktypename != null" >
+        booktypename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="booktypeid != null" >
+        #{booktypeid,jdbcType=INTEGER},
+      </if>
+      <if test="booktypename != null" >
+        #{booktypename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.po.Booktype" >
+    update booktype
+    <set >
+      <if test="booktypename != null" >
+        booktypename = #{booktypename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where booktypeID = #{booktypeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.po.Booktype" >
+    update booktype
+    set booktypename = #{booktypename,jdbcType=VARCHAR}
+    where booktypeID = #{booktypeid,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultType="com.gx.po.Booktype">
+  	SELECT * FROM booktype ORDER BY booktype.booktypeID DESC
+  </select>
+  <select id="findByName" resultType="com.gx.po.Booktype">
+  	SELECT * FROM booktype 
+  	WHERE booktype.booktypename LIKE CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+  	ORDER BY booktype.booktypeID DESC
+  </select>
+</mapper>

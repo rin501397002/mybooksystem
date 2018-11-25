@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.dao.LibraryMapper" >
+  <resultMap id="BaseResultMap" type="com.gx.po.Library" >
+    <id column="libraryID" property="libraryid" jdbcType="INTEGER" />
+    <result column="libraryname" property="libraryname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    libraryID, libraryname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from library
+    where libraryID = #{libraryid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from library
+    where libraryID = #{libraryid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gx.po.Library" >
+    insert into library (libraryID, libraryname)
+    values (#{libraryid,jdbcType=INTEGER}, #{libraryname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.po.Library" >
+    insert into library
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="libraryid != null" >
+        libraryID,
+      </if>
+      <if test="libraryname != null" >
+        libraryname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="libraryid != null" >
+        #{libraryid,jdbcType=INTEGER},
+      </if>
+      <if test="libraryname != null" >
+        #{libraryname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.po.Library" >
+    update library
+    <set >
+      <if test="libraryname != null" >
+        libraryname = #{libraryname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where libraryID = #{libraryid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.po.Library" >
+    update library
+    set libraryname = #{libraryname,jdbcType=VARCHAR}
+    where libraryID = #{libraryid,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultType="com.gx.po.Library">
+  	SELECT * FROM library ORDER BY library.libraryID DESC
+  </select>
+  <select id="findByName" resultType="com.gx.po.Library">
+  	SELECT * FROM library
+  	WHERE library.libraryname LIKE CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+  	ORDER BY library.libraryID DESC
+  </select>
+  
+</mapper>

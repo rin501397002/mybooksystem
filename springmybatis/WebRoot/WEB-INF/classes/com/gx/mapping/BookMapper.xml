@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.dao.BookMapper" >
+  <resultMap id="BaseResultMap" type="com.gx.po.Book" >
+    <id column="bookID" property="bookid" jdbcType="INTEGER" />
+    <result column="booknumber" property="booknumber" jdbcType="VARCHAR" />
+    <result column="bookname" property="bookname" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="press" property="press" jdbcType="VARCHAR" />
+    <result column="presstime" property="presstime" jdbcType="DATE" />
+    <result column="bookamount" property="bookamount" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="booktype" property="booktype" jdbcType="INTEGER" />
+    <result column="pagenumber" property="pagenumber" jdbcType="INTEGER" />
+    <result column="entrydate" property="entrydate" jdbcType="DATE" />
+    <result column="library" property="library" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bookID, booknumber, bookname, author, press, presstime, bookamount, price, intro, 
+    booktype, pagenumber, entrydate, library
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where bookID = #{bookid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from book
+    where bookID = #{bookid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gx.po.Book" >
+    insert into book (bookID, booknumber, bookname, 
+      author, press, presstime, 
+      bookamount, price, intro, 
+      booktype, pagenumber, entrydate, 
+      library)
+    values (#{bookid,jdbcType=INTEGER}, #{booknumber,jdbcType=VARCHAR}, #{bookname,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{press,jdbcType=VARCHAR}, #{presstime,jdbcType=DATE}, 
+      #{bookamount,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{intro,jdbcType=VARCHAR}, 
+      #{booktype,jdbcType=INTEGER}, #{pagenumber,jdbcType=INTEGER}, #{entrydate,jdbcType=DATE}, 
+      #{library,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.po.Book" >
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookid != null" >
+        bookID,
+      </if>
+      <if test="booknumber != null" >
+        booknumber,
+      </if>
+      <if test="bookname != null" >
+        bookname,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="press != null" >
+        press,
+      </if>
+      <if test="presstime != null" >
+        presstime,
+      </if>
+      <if test="bookamount != null" >
+        bookamount,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="booktype != null" >
+        booktype,
+      </if>
+      <if test="pagenumber != null" >
+        pagenumber,
+      </if>
+      <if test="entrydate != null" >
+        entrydate,
+      </if>
+      <if test="library != null" >
+        library,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookid != null" >
+        #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="booknumber != null" >
+        #{booknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bookname != null" >
+        #{bookname,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="press != null" >
+        #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="presstime != null" >
+        #{presstime,jdbcType=DATE},
+      </if>
+      <if test="bookamount != null" >
+        #{bookamount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="booktype != null" >
+        #{booktype,jdbcType=INTEGER},
+      </if>
+      <if test="pagenumber != null" >
+        #{pagenumber,jdbcType=INTEGER},
+      </if>
+      <if test="entrydate != null" >
+        #{entrydate,jdbcType=DATE},
+      </if>
+      <if test="library != null" >
+        #{library,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.po.Book" >
+    update book
+    <set >
+      <if test="booknumber != null" >
+        booknumber = #{booknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bookname != null" >
+        bookname = #{bookname,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="press != null" >
+        press = #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="presstime != null" >
+        presstime = #{presstime,jdbcType=DATE},
+      </if>
+      <if test="bookamount != null" >
+        bookamount = #{bookamount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="booktype != null" >
+        booktype = #{booktype,jdbcType=INTEGER},
+      </if>
+      <if test="pagenumber != null" >
+        pagenumber = #{pagenumber,jdbcType=INTEGER},
+      </if>
+      <if test="entrydate != null" >
+        entrydate = #{entrydate,jdbcType=DATE},
+      </if>
+      <if test="library != null" >
+        library = #{library,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bookID = #{bookid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.po.Book" >
+    update book
+    set booknumber = #{booknumber,jdbcType=VARCHAR},
+      bookname = #{bookname,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      press = #{press,jdbcType=VARCHAR},
+      presstime = #{presstime,jdbcType=DATE},
+      bookamount = #{bookamount,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      intro = #{intro,jdbcType=VARCHAR},
+      booktype = #{booktype,jdbcType=INTEGER},
+      pagenumber = #{pagenumber,jdbcType=INTEGER},
+      entrydate = #{entrydate,jdbcType=DATE},
+      library = #{library,jdbcType=INTEGER}
+    where bookID = #{bookid,jdbcType=INTEGER}
+  </update>
+  <select id="findAll" resultType="com.gx.vo.BookVo">
+  	SELECT book.*,librarys.libraryname,booktypes.booktypename  FROM   book 
+	INNER JOIN library  AS librarys  ON book.library =librarys.libraryID 
+	INNER JOIN booktype AS booktypes ON book.booktype=booktypes.booktypeID
+	ORDER BY book.bookID DESC
+  </select>
+  <select id="findByName" resultType="com.gx.vo.BookVo">
+  	SELECT book.*,librarys.libraryname,booktypes.booktypename  FROM   book 
+	INNER JOIN library  AS librarys  ON book.library =librarys.libraryID 
+	INNER JOIN booktype AS booktypes ON book.booktype=booktypes.booktypeID
+	WHERE book.bookname  LIKE CONCAT('%',#{name,jdbcType=VARCHAR},'%') OR book.author  LIKE CONCAT('%',#{name,jdbcType=VARCHAR},'%')  
+	ORDER BY book.bookID DESC
+  </select>
+</mapper>
